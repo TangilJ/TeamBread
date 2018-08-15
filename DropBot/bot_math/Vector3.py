@@ -1,0 +1,89 @@
+import rlbot.utils.structures.game_data_struct as game_data_struct
+import math
+from typing import Tuple
+from . import Number
+from .Vector2 import Vector2
+
+
+class Vector3:
+    def __init__(self, x: any, y: any = None, z: any = None):
+        self.x: Number = 0
+        self.y: Number = 0
+        self.z: Number = 0
+
+        if isinstance(x, game_data_struct.Vector3):
+            self.x = x.x
+            self.y = x.y
+            self.z = x.z
+        elif isinstance(x, Vector3):
+            self.x = x.x
+            self.y = x.y
+            self.z = x.z
+        elif isinstance(x, Vector2):
+            self.x = x.x
+            self.y = x.y
+            self.z = 0
+        elif isinstance(x, game_data_struct.Rotator):
+            self.x = x.roll
+            self.y = x.pitch
+            self.z = x.yaw
+        else:
+            try:
+                self.x = float(x)
+                self.y = float(y)
+                self.z = float(z)
+            except ValueError:
+                raise TypeError("Wrong type(s) given")
+
+    def __add__(self, v: "Vector3") -> "Vector3":
+        return Vector3(self.x + v.x, self.y + v.y, self.z + v.z)
+    
+    def __sub__(self, v: "Vector3") -> "Vector3":
+        return Vector3(self.x - v.x, self.y - v.y, self.z - v.z)
+    
+    def __mul__(self, v: "Vector3") -> "Vector3":
+        return Vector3(self.x * v, self.y * v, self.z * v)
+    
+    def __truediv__(self, v: "Vector3") -> "Vector3":
+        return Vector3(self.x / v, self.y / v, self.z / v)
+    
+    def __rmul__(self, v: "Vector3") -> "Vector3":
+        return Vector3(self.x * v, self.y * v, self.z * v)
+    
+    def __rtruediv__(self, v: "Vector3") -> "Vector3":
+        return Vector3(self.x / v, self.y / v, self.z / v)
+    
+    def __str__(self) -> str:
+        return f"({self.x}, {self.y}, {self.z})"
+
+    def __repr__(self) -> str:
+        return self.__str__()
+    
+    def magnitude(self) -> Number:
+        return abs(math.sqrt(self.x**2 + self.y**2 + self.z**2))
+    
+    def normalised(self) -> "Vector3":
+        mag = self.magnitude()
+        return Vector3(self.x / mag, self.y / mag, self.z / mag)
+
+    def to_tuple(self) -> Tuple[Number, Number, Number]:
+        return self.x, self.y, self.z
+    
+    @staticmethod
+    def dot_product(v1: "Vector3", v2: "Vector3") -> Number:
+        return v1.x * v2.x + v1.y * v2.y + v1.z * v2.z
+    
+    @staticmethod
+    def reflect(vector: "Vector3", normal: "Vector3") -> "Vector3":
+        dot = Vector3.dot_product(vector, normal)
+        return Vector3(vector.x - 2 * dot * normal.x,
+                       vector.y - 2 * dot * normal.y,
+                       vector.z - 2 * dot * normal.z)
+
+    @staticmethod
+    def distance(p1: "Vector3", p2: "Vector3") -> Number:
+        return math.sqrt((p2.x - p1.x)**2 + (p2.y - p1.y)**2 + (p2.z - p1.z)**2)
+
+    @staticmethod
+    def angle(v1: "Vector3", v2: "Vector3") -> Number:
+        raise NotImplementedError("angle method not yet implemented")
