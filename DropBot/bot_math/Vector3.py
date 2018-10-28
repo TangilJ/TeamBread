@@ -72,6 +72,13 @@ class Vector3:
     @staticmethod
     def dot_product(v1: "Vector3", v2: "Vector3") -> Number:
         return v1.x * v2.x + v1.y * v2.y + v1.z * v2.z
+
+    @staticmethod
+    def cross_product(v1: "Vector3", v2: "Vector3") -> "Vector3":
+        x = v1.y * v2.z - v1.z * v2.y
+        y = v1.z * v2.x - v1.x * v2.z
+        z = v1.x * v2.y - v1.y * v2.x
+        return Vector3(x, y, z)
     
     @staticmethod
     def reflect(vector: "Vector3", normal: "Vector3") -> "Vector3":
