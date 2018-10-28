@@ -7,7 +7,7 @@ def get_tile_average(packet: GameTickPacket, field_info: FieldInfoPacket) -> Vec
     sum_x = 0
     sum_y = 0
     sum_z = 0
-    total_weight = 1
+    total_weight = 0
     weight_multiplier = 2  # tested 2 and 3, 2 seems better
     
     for num_tile in range(num_tiles):
