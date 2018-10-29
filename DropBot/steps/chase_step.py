@@ -9,9 +9,10 @@ class ChaseStep(BaseStep):
     def get_output(self, packet: GameTickPacket) -> SimpleControllerState:
         ball = PhysicsObject(packet.game_ball.physics)
         bot = PhysicsObject(packet.game_cars[self.index].physics)
-        steer = steering.simple_aim(bot.location, ball.location)
+        steer = steering.simple_aim(bot.location, bot.rotation.z, ball.location)
 
         controller = SimpleControllerState()
         controller.steer = steer
+        controller.throttle = 1
 
         return controller
