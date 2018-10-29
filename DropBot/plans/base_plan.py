@@ -12,17 +12,28 @@ class Plan:
         self.field_info: FieldInfoPacket = field_info
 
         self.cancellable: bool = True
+        self.sequential: bool = True  # If True, steps are done in order. If False, steps are decided by `decide_step`.
         self.steps: List[BaseStep] = []
         self.step_index = 0
 
+    def decide_step(self, packet: GameTickPacket) -> int:
+        pass
+
     def get_output(self, packet: GameTickPacket) -> Union[SimpleControllerState, None]:
-        # Execute each step in order. If a step returns None, move on to the next step.
-        output = self.steps[self.step_index].get_output(packet)
-        while output is None and self.step_index < len(self.steps):
-            self.step_index += 1
+        if self.sequential:
+            # Execute each step in order. If a step returns None, move on to the next step.
             output = self.steps[self.step_index].get_output(packet)
+            while output is None and self.step_index < len(self.steps):
+                output = self.steps[self.step_index].get_output(packet)
+                self.step_index += 1
 
-        if self.step_index > len(self.steps) - 1:
-            return None
+            if self.step_index > len(self.steps) - 1:
+                return None
 
-        return output
+            return output
+        else:
+            if self.decide_step(packet) is None:
+                return None
+            # NOTE: Plan will end early if the decided step returns None.
+            return self.steps[self.decide_step(packet)].get_output(packet)
+
