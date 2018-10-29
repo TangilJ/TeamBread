@@ -1,12 +1,14 @@
 from DropBot.bot_math.Vector3 import Vector3
 from rlbot.agents.base_agent import SimpleControllerState
+import math
 
 SPEED_MATCH = 1.3  # How quickly the speed should match the target speed in `arrive_on_time`
 
 
-def simple_aim(position: Vector3, target: Vector3) -> float:
+def simple_aim(position: Vector3, yaw: float, target: Vector3) -> float:
     pos_to_target = target - position
-    self_right = Vector3.cross_product(position, Vector3(0, 1, 0))
+    facing = Vector3(math.cos(yaw), math.sin(yaw), 0)
+    self_right = Vector3.cross_product(facing, Vector3(0, 0, 1))
 
     if Vector3.dot_product(self_right, pos_to_target) < 0:
         return 1.0
