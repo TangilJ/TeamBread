@@ -7,8 +7,8 @@ from DropBot.utils import steering
 
 class ChaseStep(BaseStep):
     def get_output(self, packet: GameTickPacket) -> SimpleControllerState:
-        ball = PhysicsObject(packet.ball.physics)
-        bot = PhysicsObject(packet.players[self.index].physics)
+        ball = PhysicsObject(packet.game_ball.physics)
+        bot = PhysicsObject(packet.game_cars[self.index].physics)
         steer = steering.simple_aim(bot.location, ball.location)
 
         controller = SimpleControllerState()

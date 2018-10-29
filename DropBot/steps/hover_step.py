@@ -10,7 +10,7 @@ class HoverStep(BaseStep):
     def get_output(self, packet: GameTickPacket) -> SimpleControllerState:
         controller = SimpleControllerState()
 
-        bot = PhysicsObject(packet.players[self.index].physics)
+        bot = PhysicsObject(packet.game_cars[self.index].physics)
         average: Vector3 = tile_average.get_tile_average(packet, self.field_info)
 
         controller.throttle = 1

@@ -9,8 +9,8 @@ class DribbleStep(BaseStep):
     def get_output(self, packet: GameTickPacket) -> SimpleControllerState:
         controller = SimpleControllerState()
 
-        ball = PhysicsObject(packet.ball.physics)
-        bot = PhysicsObject(packet.players[self.index].physics)
+        ball = PhysicsObject(packet.game_ball.physics)
+        bot = PhysicsObject(packet.game_cars[self.index].physics)
 
         landing, flight_time = ball_prediction.predict_landing_pos_time(ball.location, ball.velocity)
         out = steering.arrive_on_time(bot.location, bot.velocity, landing, flight_time)
