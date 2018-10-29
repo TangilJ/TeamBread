@@ -8,4 +8,6 @@ from typing import List
 class ChasePlan(Plan):
     def __init__(self, name: str, team: int, index: int, field_info: FieldInfoPacket):
         super().__init__(name, team, index, field_info)
-        self.steps: List[BaseStep] = [ChaseStep]
+        self.steps: List[BaseStep] = [
+            ChaseStep(name, team, index, field_info)
+        ]
