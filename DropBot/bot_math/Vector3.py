@@ -2,7 +2,6 @@ import rlbot.utils.structures.game_data_struct as game_data_struct
 import math
 from typing import Tuple
 from . import Number
-from .Vector2 import Vector2
 
 
 class Vector3:
@@ -11,6 +10,7 @@ class Vector3:
         self.y: Number = 0
         self.z: Number = 0
 
+        from .Vector2 import Vector2
         if isinstance(x, game_data_struct.Vector3):
             self.x = x.x
             self.y = x.y

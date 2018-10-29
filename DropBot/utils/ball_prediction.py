@@ -1,5 +1,5 @@
 import math
-from ..bot_math.Vector3 import Vector3
+from DropBot.bot_math.Vector3 import Vector3
 from typing import Tuple
 
 GROUND_Z_AXIS = 92

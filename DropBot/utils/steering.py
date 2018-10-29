@@ -1,4 +1,4 @@
-from ..bot_math.Vector3 import Vector3
+from DropBot.bot_math.Vector3 import Vector3
 from rlbot.agents.base_agent import SimpleControllerState
 
 SPEED_MATCH = 1.3  # How quickly the speed should match the target speed in `arrive_on_time`

@@ -1,5 +1,5 @@
 from rlbot.utils.structures.game_data_struct import GameTickPacket, FieldInfoPacket
-from ..bot_math.Vector3 import Vector3
+from DropBot.bot_math.Vector3 import Vector3
 
 
 def get_tile_average(packet: GameTickPacket, field_info: FieldInfoPacket) -> Vector3:

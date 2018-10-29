@@ -1,7 +1,7 @@
 from rlbot.utils.structures.game_data_struct import FieldInfoPacket
 from .base_plan import Plan
-from ..steps.base_step import BaseStep
-from ..steps.chase_step import ChaseStep
+from DropBot.steps.base_step import BaseStep
+from DropBot.steps.chase_step import ChaseStep
 from typing import List
 
 

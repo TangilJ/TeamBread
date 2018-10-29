@@ -1,6 +1,6 @@
 from rlbot.utils.structures.game_data_struct import GameTickPacket, FieldInfoPacket
 from rlbot.agents.base_agent import SimpleControllerState
-from ..steps.base_step import BaseStep
+from DropBot.steps.base_step import BaseStep
 from typing import List, Union
 
 
