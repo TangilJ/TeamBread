@@ -15,6 +15,6 @@ class HoverStep(BaseStep):
 
         controller.throttle = 1
         controller.boost = False
-        controller.steer = steering.simple_aim(bot.location, average)
+        controller.steer = steering.simple_aim(bot.location, bot.rotation.z, average)
 
         return controller
