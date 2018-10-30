@@ -16,6 +16,6 @@ class DribbleStep(BaseStep):
         out = steering.arrive_on_time(bot.location, bot.velocity, landing, flight_time)
         controller.throttle = out.throttle
         controller.boost = out.boost
-        controller.steer = steering.simple_aim(bot.location, landing)
+        controller.steer = steering.simple_aim(bot.location, bot.rotation.z, landing)
 
         return controller
