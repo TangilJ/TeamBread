@@ -1,15 +1,15 @@
 import rlbot.utils.structures.game_data_struct as game_data_struct
 import math
-from typing import Tuple
-from . import Number
-from .Vector3 import Vector3
+from typing import Tuple, Optional
+from . import Number, VectorArgument
 
 
 class Vector2:
-    def __init__(self, x: any, y: any = None):
+    def __init__(self, x: VectorArgument, y: Optional[Number] = None):
         self.x: Number = 0
         self.y: Number = 0
 
+        from .Vector3 import Vector3
         if isinstance(x, game_data_struct.Vector3):
             self.x = x.x
             self.y = x.y
@@ -22,12 +22,11 @@ class Vector2:
         elif isinstance(x, game_data_struct.Rotator):
             self.x = x.roll
             self.y = x.pitch
+        elif y is not None:
+            self.x = x
+            self.y = y
         else:
-            try:
-                self.x = float(x)
-                self.y = float(y)
-            except ValueError:
-                raise TypeError("Wrong type(s) given")
+            raise TypeError("Wrong type given for Vector2.y")
 
     def __add__(self, v: "Vector2") -> "Vector2":
         return Vector2(self.x + v.x, self.y + v.y)
@@ -35,16 +34,16 @@ class Vector2:
     def __sub__(self, v: "Vector2") -> "Vector2":
         return Vector2(self.x - v.x, self.y - v.y)
     
-    def __mul__(self, v: "Vector2") -> "Vector2":
+    def __mul__(self, v: Number) -> "Vector2":
         return Vector2(self.x * v, self.y * v)
     
-    def __truediv__(self, v: "Vector2") -> "Vector2":
+    def __truediv__(self, v: Number) -> "Vector2":
         return Vector2(self.x / v, self.y / v)
     
-    def __rmul__(self, v: "Vector2") -> "Vector2":
+    def __rmul__(self, v: Number) -> "Vector2":
         return Vector2(self.x * v, self.y * v)
     
-    def __rtruediv__(self, v: "Vector2") -> "Vector2":
+    def __rtruediv__(self, v: Number) -> "Vector2":
         return Vector2(self.x / v, self.y / v)
     
     def __str__(self) -> str:
