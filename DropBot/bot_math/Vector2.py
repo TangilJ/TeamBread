@@ -1,7 +1,10 @@
 import rlbot.utils.structures.game_data_struct as game_data_struct
 import math
-from typing import Tuple, Optional
-from . import Number, VectorArgument
+from typing import Tuple, Optional, Union
+from . import Number
+
+
+VectorArgument = Union[Number, game_data_struct.Vector3, game_data_struct.Rotator]
 
 
 class Vector2:
@@ -9,14 +12,7 @@ class Vector2:
         self.x: Number = 0
         self.y: Number = 0
 
-        from .Vector3 import Vector3
         if isinstance(x, game_data_struct.Vector3):
-            self.x = x.x
-            self.y = x.y
-        elif isinstance(x, Vector2):
-            self.x = x.x
-            self.y = x.y
-        elif isinstance(x, Vector3):
             self.x = x.x
             self.y = x.y
         elif isinstance(x, game_data_struct.Rotator):
