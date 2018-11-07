@@ -1,10 +1,11 @@
+from abc import ABCMeta
 from rlbot.utils.structures.game_data_struct import GameTickPacket, FieldInfoPacket
 from rlbot.agents.base_agent import SimpleControllerState
 from DropBot.steps.base_step import BaseStep
 from typing import List, Union
 
 
-class Plan:
+class Plan(metaclass=ABCMeta):
     def __init__(self, name: str, team: int, index: int, field_info: FieldInfoPacket):
         self.name: str = name
         self.team: int = team
