@@ -3,6 +3,7 @@ RefreshEnv.cmd
 requirements.txt
 rlbot.cfg
 run.bat
+run.py
 run-gui.bat
 
 # Created by .ignore support plugin (hsz.mobi)
