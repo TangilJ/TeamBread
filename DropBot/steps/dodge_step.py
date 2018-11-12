@@ -11,6 +11,7 @@ class DodgeStep(BaseStep):
     def __init__(self, name: str, team: int, index: int, field_info: FieldInfoPacket, target: Vector3, dodge_time: float = 0.2):
         super().__init__(name, team, index, field_info)
         self.target: Vector3 = target
+        self.cancellable: bool = False
 
         self.on_second_jump = False
         self.next_dodge_time = 0
