@@ -1,6 +1,7 @@
 from rlbot.utils.structures.game_data_struct import GameTickPacket, FieldInfoPacket
 from DropBot.plans.move_plan import MovePlan
 from DropBot.plans.defend_plan import DefendPlan
+from DropBot.plans.attack_plan import AttackPlan
 from DropBot.plans.dribble_plan import DribblePlan
 from DropBot.plans.base_plan import Plan
 from DropBot.bot_math.Vector3 import Vector3
@@ -25,14 +26,14 @@ class PlanChooser:
         else:
             if self.on_kickoff:
                 self.on_kickoff = False
-                self.current_plan = self.__choose_new_plan(packet)
+                self.current_plan = self.__choose_new_plan()
 
         return self.current_plan
 
-    def __choose_new_plan(self, packet: GameTickPacket) -> Plan:
-        # TODO: Finish this method. Zone.ONE_AND_TWO sticks to DefendPlan.
-        # TODO: Zone.THREE and Zone.FOUR stick to a new AttackPlan.
-        return DribblePlan(self.agent, Vector3(packet.game_ball.physics.location))
+    def __choose_new_plan(self) -> Plan:
+        if self.zone == Zone.ONE_AND_TWO:
+            return DefendPlan(self.agent)
+        return AttackPlan(self.agent, self.zone)
 
     def __choose_kickoff_plan(self, packet: GameTickPacket) -> Plan:
         is_on_diagonal = False
