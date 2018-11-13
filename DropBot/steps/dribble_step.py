@@ -1,5 +1,5 @@
 from rlbot.utils.structures.game_data_struct import GameTickPacket
-from rlbot.agents.base_agent import SimpleControllerState
+from rlbot.agents.base_agent import BaseAgent, SimpleControllerState
 from .base_step import BaseStep
 from DropBot.bot_math import Vector3
 from DropBot.bot_math.Vector2 import Vector2
@@ -13,6 +13,10 @@ p_s = 0.
 
 
 class DribbleStep(BaseStep):
+    def __init__(self, agent: BaseAgent, target: Vector3):
+        super().__init__(agent)
+        self.target: Vector3 = target
+
     def aim(self, ball_x, ball_y, ball_z, ball_vel_x, ball_vel_y, target_x, target_y):
 
         # functions for finding angle between two vectors
