@@ -32,7 +32,7 @@ class PlanChooser:
     def __choose_new_plan(self, packet: GameTickPacket) -> Plan:
         # TODO: Finish this method. Zone.ONE_AND_TWO sticks to DefendPlan.
         # TODO: Zone.THREE and Zone.FOUR stick to a new AttackPlan.
-        return DribblePlan(self.agent)
+        return DribblePlan(self.agent, Vector3(packet.game_ball.physics.location))
 
     def __choose_kickoff_plan(self, packet: GameTickPacket) -> Plan:
         is_on_diagonal = False
@@ -62,11 +62,11 @@ class PlanChooser:
         if is_on_diagonal:
             if not teammate_on_diagonal:
                 self.zone = Zone.THREE
-                return DribblePlan(self.agent)
+                return DribblePlan(self.agent, Vector3(packet.game_ball.physics.location))
             else:
                 if bot_loc.x > 0:
                     self.zone = Zone.THREE
-                    return DribblePlan(self.agent)
+                    return DribblePlan(self.agent, Vector3(packet.game_ball.physics.location))
                 else:
                     self.zone = Zone.FOUR
                     opponent_side = Vector3(bot_loc.x, -team_side_y, bot_loc.z)

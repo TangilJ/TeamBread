@@ -8,6 +8,4 @@ from typing import List
 class AttackPlan(Plan):
     def __init__(self, agent: BaseAgent):
         super().__init__(agent)
-        self.steps: List[BaseStep] = [
-            DribbleStep(agent)
-        ]
+        self.steps: List[BaseStep] = []

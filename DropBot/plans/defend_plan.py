@@ -30,6 +30,6 @@ class DefendPlan(Plan):
         if ball_landing_on_our_side:
             if Vector3.distance(ball.location, bot.location) < 200:
                 return DodgeStep(self.agent, ball.location)
-            return DribbleStep(self.agent)
+            return DribbleStep(self.agent, ball.location)
         else:
             return HoverStep(self.agent.name)
