@@ -4,17 +4,14 @@ from DropBot.plans.defend_plan import DefendPlan
 from DropBot.plans.dribble_plan import DribblePlan
 from DropBot.plans.base_plan import Plan
 from DropBot.bot_math.Vector3 import Vector3
+from rlbot.agents.base_agent import BaseAgent
 from .zone import Zone
 
 
 class PlanChooser:
-    def __init__(self, name: str, team: int, index: int, field_info: FieldInfoPacket):
-        self.name: str = name
-        self.team: int = team
-        self.index: int = index
-        self.field_info: FieldInfoPacket = field_info
-        self.plan_args = (name, team, index, field_info)
-        self.current_plan: Plan = DefendPlan(*self.plan_args)
+    def __init__(self, agent: BaseAgent):
+        self.agent: BaseAgent = agent
+        self.current_plan: Plan = DefendPlan(agent)
         self.on_kickoff: bool = False
         self.zone: Zone = Zone.ONE_AND_TWO
 
@@ -35,19 +32,19 @@ class PlanChooser:
     def __choose_new_plan(self, packet: GameTickPacket) -> Plan:
         # TODO: Finish this method. Zone.ONE_AND_TWO sticks to DefendPlan.
         # TODO: Zone.THREE and Zone.FOUR stick to a new AttackPlan.
-        return DribblePlan(*self.plan_args)
+        return DribblePlan(self.agent)
 
     def __choose_kickoff_plan(self, packet: GameTickPacket) -> Plan:
         is_on_diagonal = False
         teammate_on_diagonal = False
-        bot_loc = Vector3(packet.game_cars[self.index].physics.location)
+        bot_loc = Vector3(packet.game_cars[self.agent.index].physics.location)
 
         # For every bot in our team
-        for i in range(3 * self.team, 3 * (self.team + 1)):
+        for i in range(3 * self.agent.team, 3 * (self.agent.team + 1)):
             location = packet.game_cars[i].physics.location
             # We are using ranges instead of exact values because the game engine will not always have the exact value.
             if 1860 < abs(location.x) < 1870 and 2375 < abs(location.y) < 2385:
-                if i == self.index:
+                if i == self.agent.index:
                     is_on_diagonal = True
                 else:
                     teammate_on_diagonal = True
@@ -61,20 +58,20 @@ class PlanChooser:
         # it will go to the opponent's side and chill there waiting for the ball to be passed to it.
         #
         # The remaining bot will stay on its side.
-        team_side_y = 1200 * (1 if self.team else -1)
+        team_side_y = 1200 * (1 if self.agent.team else -1)
         if is_on_diagonal:
             if not teammate_on_diagonal:
                 self.zone = Zone.THREE
-                return DribblePlan(*self.plan_args)
+                return DribblePlan(self.agent)
             else:
                 if bot_loc.x > 0:
                     self.zone = Zone.THREE
-                    return DribblePlan(*self.plan_args)
+                    return DribblePlan(self.agent)
                 else:
                     self.zone = Zone.FOUR
                     opponent_side = Vector3(bot_loc.x, -team_side_y, bot_loc.z)
-                    return MovePlan(*self.plan_args, opponent_side)
+                    return MovePlan(self.agent, opponent_side)
         else:
             self.zone = Zone.ONE_AND_TWO
             team_side = Vector3(bot_loc.x, team_side_y, bot_loc.z)
-            return MovePlan(*self.plan_args, team_side)
+            return MovePlan(self.agent, team_side)

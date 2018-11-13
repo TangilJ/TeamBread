@@ -1,5 +1,5 @@
 from rlbot.utils.structures.game_data_struct import GameTickPacket, FieldInfoPacket
-from rlbot.agents.base_agent import SimpleControllerState
+from rlbot.agents.base_agent import BaseAgent, SimpleControllerState
 from .base_step import BaseStep
 from DropBot.bot_math.Vector3 import Vector3
 from DropBot.objects.physics_object import PhysicsObject
@@ -8,8 +8,8 @@ import math
 
 
 class DodgeStep(BaseStep):
-    def __init__(self, name: str, team: int, index: int, field_info: FieldInfoPacket, target: Vector3, dodge_time: float = 0.2):
-        super().__init__(name, team, index, field_info)
+    def __init__(self, agent: BaseAgent, target: Vector3, dodge_time: float = 0.2):
+        super().__init__(agent)
         self.target: Vector3 = target
         self.cancellable: bool = False
 
@@ -19,7 +19,7 @@ class DodgeStep(BaseStep):
 
     def get_output(self, packet: GameTickPacket) -> Optional[SimpleControllerState]:
         controller = SimpleControllerState()
-        bot = PhysicsObject(packet.game_cars[self.index].physics)
+        bot = PhysicsObject(packet.game_cars[self.agent.index].physics)
 
         if packet.game_info.seconds_elapsed > self.next_dodge_time:
             controller.jump = True

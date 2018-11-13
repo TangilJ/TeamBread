@@ -207,9 +207,9 @@ class DribbleStep(BaseStep):
         self.controller: SimpleControllerState = SimpleControllerState()
 
         # Update game data variables
-        self.bot_yaw = packet.game_cars[self.team].physics.rotation.yaw
-        self.bot_pos = packet.game_cars[self.index].physics.location
-        self.bot_vel = packet.game_cars[self.index].physics.velocity
+        self.bot_yaw = packet.game_cars[self.agent.team].physics.rotation.yaw
+        self.bot_pos = packet.game_cars[self.agent.index].physics.location
+        self.bot_vel = packet.game_cars[self.agent.index].physics.velocity
 
         ball_pos = packet.game_ball.physics.location
         ball_vel = packet.game_ball.physics.velocity

@@ -1,15 +1,12 @@
 from abc import ABCMeta, abstractmethod
 from rlbot.utils.structures.game_data_struct import GameTickPacket, FieldInfoPacket
-from rlbot.agents.base_agent import SimpleControllerState
+from rlbot.agents.base_agent import BaseAgent, SimpleControllerState
 from typing import Union
 
 
 class BaseStep(metaclass=ABCMeta):
-    def __init__(self, name: str, team: int, index: int, field_info: FieldInfoPacket):
-        self.name: str = name
-        self.team: int = team
-        self.index: int = index
-        self.field_info: FieldInfoPacket = field_info
+    def __init__(self, agent: BaseAgent):
+        self.agent: BaseAgent = agent
 
         self.cancellable: bool = True
 
