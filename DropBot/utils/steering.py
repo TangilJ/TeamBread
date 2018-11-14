@@ -20,7 +20,7 @@ def simple_aim(position: Vector3, yaw: float, target: Vector3) -> float:
 def arrive_on_time(position: Vector3, velocity: Vector3, target: Vector3, time_taken: float) -> SimpleControllerState:
     to_target = target - position
     distance = to_target.magnitude()
-    average_speed = distance / time_taken
+    average_speed = distance / (time_taken + 0.0000001)
     current_speed = velocity.magnitude()
     target_speed = (1 - SPEED_MATCH) * current_speed + SPEED_MATCH * average_speed
 

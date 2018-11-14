@@ -2,6 +2,7 @@ from rlbot.utils.structures.game_data_struct import GameTickPacket
 from rlbot.agents.base_agent import BaseAgent
 from .base_plan import Plan
 from DropBot.steps.base_step import BaseStep
+from DropBot.steps.simple_dribble_step import SimpleDribbleStep
 from DropBot.steps.move_step import MoveStep
 from DropBot.planner.zone import Zone
 from DropBot.bot_math.Vector3 import Vector3
@@ -32,5 +33,5 @@ class AttackPlan(Plan):
             ball_team = 1
 
         if ball_zone == self.zone and ball_team == self.agent.team:
-            return MoveStep(self.agent, ball.location)
+            return SimpleDribbleStep(self.agent, 0.2)
         return MoveStep(self.agent, self.area)
