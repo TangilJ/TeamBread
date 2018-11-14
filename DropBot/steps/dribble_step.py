@@ -201,8 +201,8 @@ class DribbleStep(BaseStep):
         # apply the correction
         self.controller.steer = correction
         # ToDo: use ball velocity to get the anlge
-        print(distance_to_target)
-        print(angle_front_to_target)
+        # print(distance_to_target)
+        # print(angle_front_to_target)
         if distance_to_target < 1000 and -math.pi/3 < angle_front_to_target < math.pi/3 and distance < 500:
             self.controller.throttle = -1
             self.controller.boost = 0
