@@ -41,11 +41,11 @@ class DefendPlan(Plan):
             # If carrying the ball
             if Vector3.distance(ball.location, bot.location) < 300:
                 # If the bot is facing the opponents' side, dodge into the ball. Else, dribble it.
-                if (1/4*math.pi < bot.rotation.z < 3/4*math.pi) if self.agent.team == 0 else (-3/4*math.pi < bot.rotation.z < -1/4*math.pi):
-                    # Instantiate a new DodgeStep if the previous one expired
-                    if self.dodge_step is None:
-                        self.dodge_step = DodgeStep(self.agent, ball.location)
-                    return self.dodge_step
+                # if (1/4*math.pi < bot.rotation.z < 3/4*math.pi) if self.agent.team == 0 else (-3/4*math.pi < bot.rotation.z < -1/4*math.pi):
+                #     # Instantiate a new DodgeStep if the previous one expired
+                #     if self.dodge_step is None:
+                #         self.dodge_step = DodgeStep(self.agent, ball.location)
+                #     return self.dodge_step
                 return DribbleStep(self.agent, ball.location)
             return SimpleDribbleStep(self.agent)
         else:
