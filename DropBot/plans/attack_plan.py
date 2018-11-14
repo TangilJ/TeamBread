@@ -16,7 +16,7 @@ class AttackPlan(Plan):
         self.sequential = False
         self.zone: Zone = zone
 
-        self.area: Vector3 = Vector3(-2500, -2250, 0)
+        self.area: Vector3 = Vector3(2500, -2250, 0)
         if zone == Zone.FOUR:
             self.area.x *= -1
         if self.agent.team == 1:  # Orange team

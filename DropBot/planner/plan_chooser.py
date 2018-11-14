@@ -37,7 +37,7 @@ class PlanChooser:
 
     def __choose_kickoff_plan(self, packet: GameTickPacket) -> Plan:
         is_on_diagonal = False
-        teammate_on_diagonal = False
+        teammate_on_diagonal = []
         bot_loc = Vector3(packet.game_cars[self.agent.index].physics.location)
 
         # For every bot in our team
@@ -48,7 +48,7 @@ class PlanChooser:
                 if i == self.agent.index:
                     is_on_diagonal = True
                 else:
-                    teammate_on_diagonal = True
+                    teammate_on_diagonal.append(True)
 
         # On a kickoff, the bot goes to the ball if:
         # - It's the only one on a diagonal kickoff
@@ -61,7 +61,7 @@ class PlanChooser:
         # The remaining bot will stay on its side.
         team_side_y = 1200 * (1 if self.agent.team else -1)
         if is_on_diagonal:
-            if not teammate_on_diagonal:
+            if True not in teammate_on_diagonal:
                 self.zone = Zone.THREE
                 return DribblePlan(self.agent, Vector3(packet.game_ball.physics.location))
             else:
@@ -73,6 +73,16 @@ class PlanChooser:
                     opponent_side = Vector3(bot_loc.x, -team_side_y, bot_loc.z)
                     return MovePlan(self.agent, opponent_side)
         else:
-            self.zone = Zone.ONE_AND_TWO
-            team_side = Vector3(bot_loc.x, team_side_y, bot_loc.z)
-            return MovePlan(self.agent, team_side)
+            if teammate_on_diagonal.count(True) == 2:
+                self.zone = Zone.ONE_AND_TWO
+                team_side = Vector3(bot_loc.x, team_side_y, bot_loc.z)
+                return MovePlan(self.agent, team_side)
+            else:
+                if bot_loc.x > 0:
+                    self.zone = Zone.ONE_AND_TWO
+                    team_side = Vector3(bot_loc.x, team_side_y, bot_loc.z)
+                    return MovePlan(self.agent, team_side)
+                else:
+                    self.zone = Zone.FOUR
+                    opponent_side = Vector3(bot_loc.x, -team_side_y, bot_loc.z)
+                    return MovePlan(self.agent, opponent_side)
