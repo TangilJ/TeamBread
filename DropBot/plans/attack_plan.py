@@ -16,7 +16,7 @@ class AttackPlan(Plan):
         self.sequential = False
         self.zone: Zone = zone
 
-        self.area: Vector3 = Vector3(2500, -2250, 0)
+        self.area: Vector3 = Vector3(2500, 2250, 0)
         if zone == Zone.FOUR:
             self.area.x *= -1
         if self.agent.team == 1:  # Orange team
@@ -24,10 +24,10 @@ class AttackPlan(Plan):
 
     def decide_step(self, packet: GameTickPacket) -> BaseStep:
         ball = PhysicsObject(packet.game_ball.physics)
-        ball_zone: Zone = Zone.FOUR
+        ball_zone: Zone = Zone.THREE
         ball_team: int = 0
         if ball.location.x < 0:
-            ball_zone = Zone.THREE
+            ball_zone = Zone.FOUR
         if ball.location.y < 0:
             ball_team = 1
 
