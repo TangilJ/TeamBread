@@ -11,7 +11,7 @@ Team Bread is a custom Rocket League bot team that plays Dropshot offline. The [
       1. Do this by double clicking `run-gui.bat` in the RLBotPythonExample folder.
       1. Click the [plus button](https://i.imgur.com/PYEbnkG.png) in the Blue and Orange sections to add however many bots you want per team.
       1. Click each bot and click the [Load button](https://i.imgur.com/2mIOvU3.png). Select the `fresh.cfg`, `stale.cfg`, or `mouldy.cfg` configurations in the TeamBread folder.
-      1. Click save at the top and then click the Run button to start the match.
+      1. Click [save at the top and then click the Run button](https://i.imgur.com/3IQZIhL.png) to start the match.
    1. Alternatively, change `rlbot.cfg` manually. This is only recommended if you know what you're doing.
       1. Change the `num_participants` in the `[Match Configuration]` section to how many players you want to have. This number includes how many bots and how many humans are playing.
       1. Change the `participant_config` lines in `rlbot.cfg` (from the RLBotPythonExample folder) so that they have paths to `Bread/fresh.cfg`, `Bread/stale.cfg`, `Bread/moudly.cfg`, or all of them (they're all the same bot with different names so it doesn't matter).
