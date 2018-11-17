@@ -1,6 +1,8 @@
 # Team Bread
 Team Bread is a custom Rocket League bot team that plays Dropshot offline. The [RLBot framework](https://github.com/RLBot/RLBotPythonExample) is required to run this bot. Note that the RLBot framework only works on Windows.
 
+Team Bread was created by Redox#3830, Skyborg#4074, negachin_#0794, and dtracers#9598. Join the RLBot Discord server! https://discord.gg/q9pbsWz
+
 # Running Team Bread
 
 1. Download or clone the [RLBotPythonExample](https://github.com/RLBot/RLBotPythonExample) repository.
