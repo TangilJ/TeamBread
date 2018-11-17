@@ -1,14 +1,14 @@
 from rlbot.agents.base_agent import BaseAgent
 from .base_plan import Plan
-from DropBot.steps.base_step import BaseStep
-from DropBot.steps.move_step import MoveStep
-from DropBot.bot_math.Vector3 import Vector3
+from Bread.steps.base_step import BaseStep
+from Bread.steps.dribble_step import DribbleStep
 from typing import List
+from Bread.bot_math.Vector3 import Vector3
 
 
-class MovePlan(Plan):
+class DribblePlan(Plan):
     def __init__(self, agent: BaseAgent, target: Vector3):
         super().__init__(agent)
         self.steps: List[BaseStep] = [
-            MoveStep(agent, target)
+            DribbleStep(agent, target)
         ]

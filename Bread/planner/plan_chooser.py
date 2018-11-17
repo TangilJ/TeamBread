@@ -1,10 +1,10 @@
 from rlbot.utils.structures.game_data_struct import GameTickPacket, FieldInfoPacket
-from DropBot.plans.move_plan import MovePlan
-from DropBot.plans.defend_plan import DefendPlan
-from DropBot.plans.attack_plan import AttackPlan
-from DropBot.plans.dribble_plan import DribblePlan
-from DropBot.plans.base_plan import Plan
-from DropBot.bot_math.Vector3 import Vector3
+from Bread.plans.move_plan import MovePlan
+from Bread.plans.defend_plan import DefendPlan
+from Bread.plans.attack_plan import AttackPlan
+from Bread.plans.dribble_plan import DribblePlan
+from Bread.plans.base_plan import Plan
+from Bread.bot_math.Vector3 import Vector3
 from rlbot.agents.base_agent import BaseAgent
 from .zone import Zone
 

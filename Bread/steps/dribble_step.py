@@ -1,10 +1,10 @@
 from rlbot.utils.structures.game_data_struct import GameTickPacket
 from rlbot.agents.base_agent import BaseAgent, SimpleControllerState
 from .base_step import BaseStep
-from DropBot.bot_math import Vector3
-from DropBot.bot_math.Vector2 import Vector2
-from DropBot.objects.physics_object import PhysicsObject
-from DropBot.utils import steering, ball_prediction
+from Bread.bot_math import Vector3
+from Bread.bot_math.Vector2 import Vector2
+from Bread.objects.physics_object import PhysicsObject
+from Bread.utils import steering, ball_prediction
 # dribble imports
 import math
 import numpy as np

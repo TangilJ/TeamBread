@@ -1,9 +1,9 @@
 from rlbot.agents.base_agent import BaseAgent, SimpleControllerState
 from rlbot.utils.structures.game_data_struct import GameTickPacket
-from DropBot.planner.plan_chooser import PlanChooser
+from Bread.planner.plan_chooser import PlanChooser
 
 
-class DropBot(BaseAgent):
+class Bread(BaseAgent):
     def initialize_agent(self) -> None:
         self.plan_chooser: PlanChooser = PlanChooser(self)
 

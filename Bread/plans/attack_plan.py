@@ -1,13 +1,13 @@
 from rlbot.utils.structures.game_data_struct import GameTickPacket
 from rlbot.agents.base_agent import BaseAgent
 from .base_plan import Plan
-from DropBot.steps.base_step import BaseStep
-from DropBot.steps.simple_dribble_step import SimpleDribbleStep
-from DropBot.steps.move_step import MoveStep
-from DropBot.planner.zone import Zone
-from DropBot.bot_math.Vector3 import Vector3
+from Bread.steps.base_step import BaseStep
+from Bread.steps.simple_dribble_step import SimpleDribbleStep
+from Bread.steps.move_step import MoveStep
+from Bread.planner.zone import Zone
+from Bread.bot_math.Vector3 import Vector3
 from typing import List
-from DropBot.objects.physics_object import PhysicsObject
+from Bread.objects.physics_object import PhysicsObject
 
 
 class AttackPlan(Plan):

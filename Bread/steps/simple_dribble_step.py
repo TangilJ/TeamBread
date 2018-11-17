@@ -1,8 +1,8 @@
 from rlbot.utils.structures.game_data_struct import GameTickPacket
 from rlbot.agents.base_agent import BaseAgent, SimpleControllerState
 from .base_step import BaseStep
-from DropBot.objects.physics_object import PhysicsObject
-from DropBot.utils import steering, ball_prediction
+from Bread.objects.physics_object import PhysicsObject
+from Bread.utils import steering, ball_prediction
 
 
 class SimpleDribbleStep(BaseStep):
